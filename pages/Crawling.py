@@ -5,209 +5,379 @@ from google_play_scraper import reviews, Sort
 
 st.set_page_config(page_title="Crawling", page_icon="🔍", layout="wide")
 
-# ============ TEMA "STEAM CONSOLE" (inline, tanpa import file lain) ============
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap');
 
-def apply_theme():
-    st.markdown(textwrap.dedent("""
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-    @import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css');
-    :root {
-        --bg: #0d1117;
-        --bg-panel: #161b22;
-        --border: #2a3441;
-        --text: #e6edf3;
-        --text-dim: #8b98a5;
-        --accent: #66c0f4;
-        --accent-soft: rgba(102, 192, 244, 0.12);
-    }
-    html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
-    .stApp { background: var(--bg); color: var(--text); }
-    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif !important; }
-    [data-testid="stSidebar"] { background: var(--bg-panel); border-right: 1px solid var(--border); }
-    [data-testid="stSidebarNav"] a { border-radius: 6px; margin: 2px 8px; color: var(--text-dim) !important; }
-    [data-testid="stSidebarNav"] a:hover { background: var(--accent-soft); color: var(--text) !important; }
-    [data-testid="stSidebarNav"] a[aria-current="page"] {
-        background: var(--accent-soft); border-left: 3px solid var(--accent);
-        color: var(--accent) !important; font-weight: 600;
-    }
-    .stButton > button, .stDownloadButton > button {
-        background: transparent; border: 1px solid var(--accent); color: var(--accent);
-        border-radius: 6px; font-weight: 600;
-    }
-    .stButton > button:hover, .stDownloadButton > button:hover {
-        background: var(--accent); color: var(--bg);
-    }
-    [data-testid="stMetric"] {
-        background: var(--bg-panel); border: 1px solid var(--border);
-        border-radius: 8px; padding: 14px 16px;
-    }
-    [data-testid="stDataFrame"] { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .stSelectbox [data-baseweb="select"] {
-        background: var(--bg-panel) !important; border: 1px solid var(--border) !important;
-        color: var(--text) !important; border-radius: 6px !important;
-    }
-    </style>
-    """).strip(), unsafe_allow_html=True)
+:root {
+    --bg: #0a0e1a;
+    --bg-panel: #111827;
+    --border: #1f2d45;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --accent: #3b82f6;
+    --accent-soft: rgba(59, 130, 246, 0.1);
+    --green: #10b981;
+    --green-soft: rgba(16, 185, 129, 0.1);
+}
 
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
 
-def stage_tracker(current_stage: str):
-    stages = ["Crawling", "Classification", "Testing", "Analisis Data", "Report", "Dashboard"]
-    current_index = stages.index(current_stage) if current_stage in stages else 0
-    nodes_html = ""
-    for i, stage in enumerate(stages):
-        if i < current_index:
-            border_color, dot_bg, label_color, glow = "var(--accent)", "var(--accent)", "var(--text-dim)", ""
-        elif i == current_index:
-            border_color, dot_bg, label_color = "var(--accent)", "transparent", "var(--accent)"
-            glow = "box-shadow: 0 0 10px var(--accent);"
-        else:
-            border_color, dot_bg, label_color, glow = "var(--border)", "var(--bg-panel)", "var(--text-dim)", ""
-        nodes_html += (
-            f'<div style="display:flex;flex-direction:column;align-items:center;flex:1;min-width:0;">'
-            f'<div style="width:14px;height:14px;border-radius:50%;border:2px solid {border_color};background:{dot_bg};{glow}"></div>'
-            f'<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:{label_color};margin-top:6px;text-align:center;white-space:nowrap;">{i+1}. {stage}</div>'
-            f'</div>'
-        )
-        if i < len(stages) - 1:
-            line_color = "var(--accent)" if i < current_index else "var(--border)"
-            nodes_html += f'<div style="flex:0.6;height:2px;background:{line_color};margin-top:7px;"></div>'
-    html = (
-        '<div style="display:flex;align-items:flex-start;background:var(--bg-panel);'
-        'border:1px solid var(--border);border-radius:10px;padding:16px 20px 12px 20px;'
-        f'margin-bottom:24px;">{nodes_html}</div>'
-    )
-    st.markdown(html, unsafe_allow_html=True)
+.stApp { background: var(--bg); }
 
+[data-testid="stSidebar"] {
+    background: var(--bg-panel);
+    border-right: 1px solid var(--border);
+}
 
-def pixel_banner(eyebrow, title_html, badge, icon_class="ti-brand-steam", accent_icon="ti-search"):
-    dots = "".join(f'<span class="pbdot d{(i % 4) + 1}"></span>' for i in range(32))
-    style = textwrap.dedent("""
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-    @keyframes pb-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    @keyframes pb-blink { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
-    .pb-wrap {
-        background: #1c1440; border-radius: 0; padding: 40px 3rem; position: relative;
-        overflow: hidden; margin: -6rem -1rem 24px -1rem; width: calc(100% + 2rem);
-    }
-    .pb-dotgrid { position: absolute; top: 16px; left: 16px; display: grid; grid-template-columns: repeat(8, 10px); gap: 6px; }
-    .pbdot { width: 5px; height: 5px; border-radius: 50%; background: #8be89a; animation: pb-blink 2s ease-in-out infinite; }
-    .pbdot.d1 { animation-delay: 0s; } .pbdot.d2 { animation-delay: 0.4s; }
-    .pbdot.d3 { animation-delay: 0.8s; } .pbdot.d4 { animation-delay: 1.2s; }
-    .pb-stripe { display: inline-block; background: repeating-linear-gradient(45deg, #3fb6ad, #3fb6ad 4px, #1c1440 4px, #1c1440 8px); height: 10px; width: 150px; border-radius: 4px; margin-bottom: 14px; }
-    .pb-eyebrow { font-size: 13px; letter-spacing: 0.1em; color: #6fd1e8; text-transform: uppercase; margin-bottom: 6px; font-family: 'Inter', sans-serif; }
-    .pb-title { font-family: 'Press Start 2P', monospace; font-size: 28px; line-height: 1.5; color: #8be89a; text-shadow: 2px 2px 0 #12102c; }
-    .pb-badge { display: inline-block; margin-top: 18px; border: 2px solid #8be89a; color: #8be89a; font-family: 'Press Start 2P', monospace; font-size: 12px; padding: 8px 16px; border-radius: 2px; }
-    .pb-icon-main { position: absolute; right: 44px; top: 28px; font-size: 64px; color: #3b2f7a; animation: pb-spin 7s linear infinite; }
-    .pb-icon-accent { position: absolute; right: 158px; bottom: 34px; font-size: 32px; color: #3fb6ad; }
-    </style>
-    """).strip()
-    body = (
-        f'<div class="pb-wrap"><div class="pb-dotgrid">{dots}</div>'
-        f'<div style="position:relative;z-index:2;">'
-        f'<div class="pb-stripe"></div>'
-        f'<div class="pb-eyebrow">{eyebrow}</div>'
-        f'<div class="pb-title">{title_html}</div>'
-        f'<div class="pb-badge">{badge}</div>'
+/* HERO BANNER */
+.hero-banner {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px 56px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(59,130,246,0.3);
+    color: #60a5fa;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #f1f5f9;
+    line-height: 1.2;
+    margin-bottom: 14px;
+}
+
+.hero-title span {
+    background: linear-gradient(90deg, #3b82f6, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+    font-size: 15px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 28px;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.hero-stat-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.hero-stat-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.hero-icon {
+    position: absolute;
+    right: 56px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 96px;
+    opacity: 0.06;
+    user-select: none;
+}
+
+/* STAGE TRACKER */
+.stage-wrap {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+/* SECTION HEADER */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 28px 0 16px 0;
+}
+
+.section-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #f1f5f9;
+}
+
+/* CARD */
+.config-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+/* METRIC */
+[data-testid="stMetric"] {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+}
+
+[data-testid="stMetricLabel"] { color: var(--text-dim) !important; font-size: 12px !important; }
+[data-testid="stMetricValue"] { color: #f1f5f9 !important; font-family: 'Space Grotesk', sans-serif !important; }
+
+/* BUTTON */
+.stButton > button {
+    background: var(--accent) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 10px 24px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    transition: all 0.2s !important;
+}
+
+.stButton > button:hover {
+    background: #2563eb !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59,130,246,0.4) !important;
+}
+
+.stDownloadButton > button {
+    background: var(--green-soft) !important;
+    color: var(--green) !important;
+    border: 1px solid var(--green) !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+}
+
+/* SELECT */
+.stSelectbox [data-baseweb="select"] > div {
+    background: var(--bg-panel) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
+    color: var(--text) !important;
+}
+
+/* DATAFRAME */
+[data-testid="stDataFrame"] {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* DIVIDER */
+.divider {
+    height: 1px;
+    background: var(--border);
+    margin: 24px 0;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ── STAGE TRACKER ─────────────────────────────────────────
+stages = ["Crawling", "Analisis Data", "Classification", "Report", "Dashboard", "Testing"]
+nodes_html = ""
+for i, s in enumerate(stages):
+    active = (s == "Crawling")
+    done = False
+    bc = "#3b82f6" if active else ("#1f2d45" if not done else "#3b82f6")
+    bg = "transparent" if active else ("#1f2d45")
+    lc = "#60a5fa" if active else "#475569"
+    glow = "box-shadow:0 0 8px #3b82f6;" if active else ""
+    nodes_html += (
+        f'<div style="display:flex;flex-direction:column;align-items:center;flex:1;min-width:0;">'
+        f'<div style="width:12px;height:12px;border-radius:50%;border:2px solid {bc};background:{bg};{glow}"></div>'
+        f'<div style="font-size:10px;color:{lc};margin-top:6px;text-align:center;font-weight:{"600" if active else "400"};white-space:nowrap;">{i+1}. {s}</div>'
         f'</div>'
-        f'<i class="ti {icon_class} pb-icon-main"></i>'
-        f'<i class="ti {accent_icon} pb-icon-accent"></i>'
-        f'</div>'
     )
-    st.markdown(style + body, unsafe_allow_html=True)
+    if i < len(stages) - 1:
+        nodes_html += f'<div style="flex:0.6;height:1px;background:#1f2d45;margin-top:6px;"></div>'
 
-
-# ============ HALAMAN CRAWLING ============
-
-apply_theme()
-stage_tracker("Crawling")
-pixel_banner(
-    eyebrow="Kumpulkan data ulasan",
-    title_html="Crawling<br>Data",
-    badge="Mulai crawling !",
-    icon_class="ti-brand-steam",
-    accent_icon="ti-search",
+st.markdown(
+    f'<div style="background:#111827;border:1px solid #1f2d45;border-radius:12px;padding:14px 24px;'
+    f'margin-bottom:24px;display:flex;align-items:flex-start;">{nodes_html}</div>',
+    unsafe_allow_html=True
 )
 
-st.write("Halaman ini digunakan untuk mengambil data ulasan aplikasi Steam langsung dari Google Play Store.")
+# ── HERO BANNER ───────────────────────────────────────────
+st.markdown("""
+<div class="hero-banner">
+    <div class="hero-tag">📡 Google Play Store · Steam Mobile</div>
+    <div class="hero-title">Crawling <span>Data Ulasan</span></div>
+    <div class="hero-desc">
+        Ambil data ulasan pengguna aplikasi Steam secara langsung dari Google Play Store.
+        Pilih negara dan jumlah data, lalu unduh hasilnya dalam format CSV untuk dianalisis lebih lanjut.
+    </div>
+    <div class="hero-stats">
+        <div class="hero-stat">
+            <div class="hero-stat-value">189</div>
+            <div class="hero-stat-label">Negara Tersedia</div>
+        </div>
+        <div class="hero-stat">
+            <div class="hero-stat-value">Real-time</div>
+            <div class="hero-stat-label">Sumber Data</div>
+        </div>
+        <div class="hero-stat">
+            <div class="hero-stat-value">CSV</div>
+            <div class="hero-stat-label">Format Output</div>
+        </div>
+    </div>
+    <div class="hero-icon">🎮</div>
+</div>
+""", unsafe_allow_html=True)
+
+# ── KONFIGURASI ───────────────────────────────────────────
+st.markdown('<div class="section-header"><div class="section-dot"></div><div class="section-title">Konfigurasi Crawling</div></div>', unsafe_allow_html=True)
 
 APP_ID = 'com.valvesoftware.android.steam.community'
 
-st.subheader("Konfigurasi Crawling")
-
-urutan = st.selectbox("Urutkan berdasarkan", ["Terbaru", "Relevansi"], index=0)
-
-negara_options = {
-    "Indonesia": ("id", "id"), "Amerika Serikat": ("en", "us"), "Kanada": ("en", "ca"),
-    "Meksiko": ("es", "mx"), "Brasil": ("pt", "br"), "Argentina": ("es", "ar"),
-    "Chile": ("es", "cl"), "Kolombia": ("es", "co"), "Peru": ("es", "pe"),
-    "Venezuela": ("es", "ve"), "Ekuador": ("es", "ec"), "Bolivia": ("es", "bo"),
-    "Paraguay": ("es", "py"), "Uruguay": ("es", "uy"), "Jamaika": ("en", "jm"),
-    "Trinidad dan Tobago": ("en", "tt"), "Barbados": ("en", "bb"), "Bahama": ("en", "bs"),
-    "Belize": ("en", "bz"), "Kosta Rika": ("es", "cr"), "Panama": ("es", "pa"),
-    "Guatemala": ("es", "gt"), "Honduras": ("es", "hn"), "El Salvador": ("es", "sv"),
-    "Nicaragua": ("es", "ni"), "Republik Dominika": ("es", "do"), "Haiti": ("fr", "ht"),
-    "Kuba": ("es", "cu"), "Puerto Riko": ("es", "pr"), "Inggris": ("en", "gb"),
-    "Irlandia": ("en", "ie"), "Prancis": ("fr", "fr"), "Jerman": ("de", "de"),
-    "Italia": ("it", "it"), "Spanyol": ("es", "es"), "Portugal": ("pt", "pt"),
-    "Belanda": ("nl", "nl"), "Belgia": ("fr", "be"), "Swiss": ("de", "ch"),
-    "Austria": ("de", "at"), "Polandia": ("pl", "pl"), "Rusia": ("ru", "ru"),
-    "Ukraina": ("uk", "ua"), "Turki": ("tr", "tr"), "Ceko": ("cs", "cz"),
-    "Rumania": ("ro", "ro"), "Hungaria": ("hu", "hu"), "Yunani": ("el", "gr"),
-    "Swedia": ("sv", "se"), "Norwegia": ("no", "no"), "Denmark": ("da", "dk"),
-    "Finlandia": ("fi", "fi"), "Slovakia": ("sk", "sk"), "Slovenia": ("sl", "si"),
-    "Bulgaria": ("bg", "bg"), "Serbia": ("sr", "rs"), "Kroasia": ("hr", "hr"),
-    "Bosnia dan Herzegovina": ("bs", "ba"), "Makedonia Utara": ("mk", "mk"), "Albania": ("sq", "al"),
-    "Montenegro": ("sr", "me"), "Latvia": ("lv", "lv"), "Lituania": ("lt", "lt"),
-    "Estonia": ("et", "ee"), "Islandia": ("is", "is"), "Malta": ("mt", "mt"),
-    "Luksemburg": ("fr", "lu"), "Belarus": ("be", "by"), "Moldova": ("ro", "md"),
-    "Siprus": ("el", "cy"), "San Marino": ("it", "sm"), "Monako": ("fr", "mc"),
-    "Liechtenstein": ("de", "li"), "Andorra": ("ca", "ad"), "Vatikan": ("it", "va"),
-    "Jepang": ("ja", "jp"), "Korea Selatan": ("ko", "kr"), "China": ("zh", "cn"),
-    "Taiwan": ("zh", "tw"), "Hong Kong": ("zh", "hk"), "Malaysia": ("ms", "my"),
-    "Thailand": ("th", "th"), "Vietnam": ("vi", "vn"), "Singapura": ("en", "sg"),
-    "Filipina": ("tl", "ph"), "India": ("hi", "in"), "Pakistan": ("ur", "pk"),
-    "Bangladesh": ("bn", "bd"), "Kamboja": ("km", "kh"), "Laos": ("lo", "la"),
-    "Myanmar": ("my", "mm"), "Sri Lanka": ("si", "lk"), "Nepal": ("ne", "np"),
-    "Kazakhstan": ("kk", "kz"), "Uzbekistan": ("uz", "uz"), "Kirgizstan": ("ky", "kg"),
-    "Tajikistan": ("tg", "tj"), "Turkmenistan": ("tk", "tm"), "Azerbaijan": ("az", "az"),
-    "Armenia": ("hy", "am"), "Georgia": ("ka", "ge"), "Mongolia": ("mn", "mn"),
-    "Makau": ("zh", "mo"), "Brunei": ("ms", "bn"), "Timor-Leste": ("pt", "tl"),
-    "Bhutan": ("dz", "bt"), "Maladewa": ("dv", "mv"), "Afghanistan": ("fa", "af"),
-    "Arab Saudi": ("ar", "sa"), "Uni Emirat Arab": ("ar", "ae"), "Mesir": ("ar", "eg"),
-    "Israel": ("he", "il"), "Iran": ("fa", "ir"), "Irak": ("ar", "iq"),
-    "Yordania": ("ar", "jo"), "Lebanon": ("ar", "lb"), "Kuwait": ("ar", "kw"),
-    "Qatar": ("ar", "qa"), "Oman": ("ar", "om"), "Bahrain": ("ar", "bh"),
-    "Suriah": ("ar", "sy"), "Yaman": ("ar", "ye"), "Palestina": ("ar", "ps"),
-    "Afrika Selatan": ("en", "za"), "Nigeria": ("en", "ng"), "Kenya": ("sw", "ke"),
-    "Tanzania": ("sw", "tz"), "Ghana": ("en", "gh"), "Kamerun": ("fr", "cm"),
-    "Senegal": ("fr", "sn"), "Pantai Gading": ("fr", "ci"), "Etiopia": ("am", "et"),
-    "Uganda": ("sw", "ug"), "Mozambik": ("pt", "mz"), "Angola": ("pt", "ao"),
-    "Zambia": ("en", "zm"), "Zimbabwe": ("en", "zw"), "Rwanda": ("fr", "rw"),
-    "Botswana": ("en", "bw"), "Namibia": ("en", "na"), "Malawi": ("en", "mw"),
-    "Mauritius": ("en", "mu"), "Tunisia": ("fr", "tn"), "Maroko": ("ar", "ma"),
-    "Aljazair": ("ar", "dz"), "Libya": ("ar", "ly"), "Sudan": ("ar", "sd"),
-    "Burkina Faso": ("fr", "bf"), "Mali": ("fr", "ml"), "Niger": ("fr", "ne"),
-    "Togo": ("fr", "tg"), "Benin": ("fr", "bj"), "Gabon": ("fr", "ga"),
-    "Republik Demokratik Kongo": ("fr", "cd"), "Republik Kongo": ("fr", "cg"), "Somalia": ("so", "so"),
-    "Djibouti": ("fr", "dj"), "Eritrea": ("ti", "er"), "Madagaskar": ("fr", "mg"),
-    "Komoro": ("ar", "km"), "Seychelles": ("fr", "sc"), "Tanjung Verde": ("pt", "cv"),
-    "Guinea": ("fr", "gn"), "Guinea-Bissau": ("pt", "gw"), "Guinea Khatulistiwa": ("es", "gq"),
-    "Sierra Leone": ("en", "sl"), "Liberia": ("en", "lr"), "Gambia": ("en", "gm"),
-    "Sao Tome dan Principe": ("pt", "st"), "Afrika Tengah": ("fr", "cf"), "Chad": ("fr", "td"),
-    "Sudan Selatan": ("en", "ss"), "Burundi": ("fr", "bi"), "Lesotho": ("en", "ls"),
-    "Eswatini": ("en", "sz"), "Australia": ("en", "au"), "Selandia Baru": ("en", "nz"),
-    "Papua Nugini": ("en", "pg"), "Fiji": ("en", "fj"), "Kepulauan Solomon": ("en", "sb"),
-    "Vanuatu": ("fr", "vu"), "Samoa": ("en", "ws"), "Tonga": ("en", "to"),
-    "Kiribati": ("en", "ki"), "Nauru": ("en", "nr"), "Tuvalu": ("en", "tv"),
-    "Palau": ("en", "pw"), "Mikronesia": ("en", "fm"), "Kepulauan Marshall": ("en", "mh"),
-}
-
-negara_pilihan = st.selectbox("Pilih negara", list(negara_options.keys()), index=0)
+col1, col2 = st.columns(2)
+with col1:
+    urutan = st.selectbox("Urutkan berdasarkan", ["Terbaru", "Relevansi"], index=0)
+with col2:
+    negara_options = {
+        "Indonesia": ("id", "id"), "Amerika Serikat": ("en", "us"), "Kanada": ("en", "ca"),
+        "Meksiko": ("es", "mx"), "Brasil": ("pt", "br"), "Argentina": ("es", "ar"),
+        "Chile": ("es", "cl"), "Kolombia": ("es", "co"), "Peru": ("es", "pe"),
+        "Venezuela": ("es", "ve"), "Ekuador": ("es", "ec"), "Bolivia": ("es", "bo"),
+        "Paraguay": ("es", "py"), "Uruguay": ("es", "uy"), "Jamaika": ("en", "jm"),
+        "Trinidad dan Tobago": ("en", "tt"), "Barbados": ("en", "bb"), "Bahama": ("en", "bs"),
+        "Belize": ("en", "bz"), "Kosta Rika": ("es", "cr"), "Panama": ("es", "pa"),
+        "Guatemala": ("es", "gt"), "Honduras": ("es", "hn"), "El Salvador": ("es", "sv"),
+        "Nicaragua": ("es", "ni"), "Republik Dominika": ("es", "do"), "Haiti": ("fr", "ht"),
+        "Kuba": ("es", "cu"), "Puerto Riko": ("es", "pr"), "Inggris": ("en", "gb"),
+        "Irlandia": ("en", "ie"), "Prancis": ("fr", "fr"), "Jerman": ("de", "de"),
+        "Italia": ("it", "it"), "Spanyol": ("es", "es"), "Portugal": ("pt", "pt"),
+        "Belanda": ("nl", "nl"), "Belgia": ("fr", "be"), "Swiss": ("de", "ch"),
+        "Austria": ("de", "at"), "Polandia": ("pl", "pl"), "Rusia": ("ru", "ru"),
+        "Ukraina": ("uk", "ua"), "Turki": ("tr", "tr"), "Ceko": ("cs", "cz"),
+        "Rumania": ("ro", "ro"), "Hungaria": ("hu", "hu"), "Yunani": ("el", "gr"),
+        "Swedia": ("sv", "se"), "Norwegia": ("no", "no"), "Denmark": ("da", "dk"),
+        "Finlandia": ("fi", "fi"), "Slovakia": ("sk", "sk"), "Slovenia": ("sl", "si"),
+        "Bulgaria": ("bg", "bg"), "Serbia": ("sr", "rs"), "Kroasia": ("hr", "hr"),
+        "Bosnia dan Herzegovina": ("bs", "ba"), "Makedonia Utara": ("mk", "mk"), "Albania": ("sq", "al"),
+        "Montenegro": ("sr", "me"), "Latvia": ("lv", "lv"), "Lituania": ("lt", "lt"),
+        "Estonia": ("et", "ee"), "Islandia": ("is", "is"), "Malta": ("mt", "mt"),
+        "Luksemburg": ("fr", "lu"), "Belarus": ("be", "by"), "Moldova": ("ro", "md"),
+        "Siprus": ("el", "cy"), "San Marino": ("it", "sm"), "Monako": ("fr", "mc"),
+        "Liechtenstein": ("de", "li"), "Andorra": ("ca", "ad"), "Vatikan": ("it", "va"),
+        "Jepang": ("ja", "jp"), "Korea Selatan": ("ko", "kr"), "China": ("zh", "cn"),
+        "Taiwan": ("zh", "tw"), "Hong Kong": ("zh", "hk"), "Malaysia": ("ms", "my"),
+        "Thailand": ("th", "th"), "Vietnam": ("vi", "vn"), "Singapura": ("en", "sg"),
+        "Filipina": ("tl", "ph"), "India": ("hi", "in"), "Pakistan": ("ur", "pk"),
+        "Bangladesh": ("bn", "bd"), "Kamboja": ("km", "kh"), "Laos": ("lo", "la"),
+        "Myanmar": ("my", "mm"), "Sri Lanka": ("si", "lk"), "Nepal": ("ne", "np"),
+        "Kazakhstan": ("kk", "kz"), "Uzbekistan": ("uz", "uz"), "Kirgizstan": ("ky", "kg"),
+        "Tajikistan": ("tg", "tj"), "Turkmenistan": ("tk", "tm"), "Azerbaijan": ("az", "az"),
+        "Armenia": ("hy", "am"), "Georgia": ("ka", "ge"), "Mongolia": ("mn", "mn"),
+        "Makau": ("zh", "mo"), "Brunei": ("ms", "bn"), "Timor-Leste": ("pt", "tl"),
+        "Bhutan": ("dz", "bt"), "Maladewa": ("dv", "mv"), "Afghanistan": ("fa", "af"),
+        "Arab Saudi": ("ar", "sa"), "Uni Emirat Arab": ("ar", "ae"), "Mesir": ("ar", "eg"),
+        "Israel": ("he", "il"), "Iran": ("fa", "ir"), "Irak": ("ar", "iq"),
+        "Yordania": ("ar", "jo"), "Lebanon": ("ar", "lb"), "Kuwait": ("ar", "kw"),
+        "Qatar": ("ar", "qa"), "Oman": ("ar", "om"), "Bahrain": ("ar", "bh"),
+        "Suriah": ("ar", "sy"), "Yaman": ("ar", "ye"), "Palestina": ("ar", "ps"),
+        "Afrika Selatan": ("en", "za"), "Nigeria": ("en", "ng"), "Kenya": ("sw", "ke"),
+        "Tanzania": ("sw", "tz"), "Ghana": ("en", "gh"), "Kamerun": ("fr", "cm"),
+        "Senegal": ("fr", "sn"), "Pantai Gading": ("fr", "ci"), "Etiopia": ("am", "et"),
+        "Uganda": ("sw", "ug"), "Mozambik": ("pt", "mz"), "Angola": ("pt", "ao"),
+        "Zambia": ("en", "zm"), "Zimbabwe": ("en", "zw"), "Rwanda": ("fr", "rw"),
+        "Botswana": ("en", "bw"), "Namibia": ("en", "na"), "Malawi": ("en", "mw"),
+        "Mauritius": ("en", "mu"), "Tunisia": ("fr", "tn"), "Maroko": ("ar", "ma"),
+        "Aljazair": ("ar", "dz"), "Libya": ("ar", "ly"), "Sudan": ("ar", "sd"),
+        "Burkina Faso": ("fr", "bf"), "Mali": ("fr", "ml"), "Niger": ("fr", "ne"),
+        "Togo": ("fr", "tg"), "Benin": ("fr", "bj"), "Gabon": ("fr", "ga"),
+        "Republik Demokratik Kongo": ("fr", "cd"), "Republik Kongo": ("fr", "cg"), "Somalia": ("so", "so"),
+        "Djibouti": ("fr", "dj"), "Eritrea": ("ti", "er"), "Madagaskar": ("fr", "mg"),
+        "Komoro": ("ar", "km"), "Seychelles": ("fr", "sc"), "Tanjung Verde": ("pt", "cv"),
+        "Guinea": ("fr", "gn"), "Guinea-Bissau": ("pt", "gw"), "Guinea Khatulistiwa": ("es", "gq"),
+        "Sierra Leone": ("en", "sl"), "Liberia": ("en", "lr"), "Gambia": ("en", "gm"),
+        "Sao Tome dan Principe": ("pt", "st"), "Afrika Tengah": ("fr", "cf"), "Chad": ("fr", "td"),
+        "Sudan Selatan": ("en", "ss"), "Burundi": ("fr", "bi"), "Lesotho": ("en", "ls"),
+        "Eswatini": ("en", "sz"), "Australia": ("en", "au"), "Selandia Baru": ("en", "nz"),
+        "Papua Nugini": ("en", "pg"), "Fiji": ("en", "fj"), "Kepulauan Solomon": ("en", "sb"),
+        "Vanuatu": ("fr", "vu"), "Samoa": ("en", "ws"), "Tonga": ("en", "to"),
+        "Kiribati": ("en", "ki"), "Nauru": ("en", "nr"), "Tuvalu": ("en", "tv"),
+        "Palau": ("en", "pw"), "Mikronesia": ("en", "fm"), "Kepulauan Marshall": ("en", "mh"),
+    }
+    negara_pilihan = st.selectbox("Pilih negara", list(negara_options.keys()), index=0)
 
 lang, country = negara_options[negara_pilihan]
 sort_order = Sort.NEWEST if urutan == "Terbaru" else Sort.MOST_RELEVANT
+
+st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
 if st.button("🚀 Mulai Crawling"):
     status_placeholder = st.empty()
@@ -216,7 +386,7 @@ if st.button("🚀 Mulai Crawling"):
     batch_size = 200
 
     try:
-        with st.spinner(f"Sedang mengambil data sebanyak-banyaknya dari {negara_pilihan}..."):
+        with st.spinner(f"Sedang mengambil data dari {negara_pilihan}..."):
             while True:
                 hasil, continuation_token = reviews(
                     APP_ID, lang=lang, country=country, sort=sort_order,
@@ -242,20 +412,22 @@ if st.button("🚀 Mulai Crawling"):
             df_crawl['negara'] = negara_pilihan
             df_crawl = df_crawl.reset_index(drop=True)
 
-            st.success(f"✅ Berhasil mengambil {len(df_crawl):,} data dari {negara_pilihan} (seluruh data yang tersedia)!")
+            st.success(f"✅ Berhasil mengambil {len(df_crawl):,} data dari {negara_pilihan}!")
 
-            st.subheader("Preview Data")
+            st.markdown('<div class="section-header"><div class="section-dot"></div><div class="section-title">Ringkasan Hasil</div></div>', unsafe_allow_html=True)
+
+            col1, col2, col3, col4 = st.columns(4)
+            col1.metric("Total Data", f"{len(df_crawl):,}")
+            col2.metric("Rating 1-2 ⭐", f"{(df_crawl['rating'] <= 2).sum():,}")
+            col3.metric("Rating 3 ⭐", f"{(df_crawl['rating'] == 3).sum():,}")
+            col4.metric("Rating 4-5 ⭐", f"{(df_crawl['rating'] >= 4).sum():,}")
+
+            st.markdown('<div class="section-header"><div class="section-dot"></div><div class="section-title">Preview Data (20 Teratas)</div></div>', unsafe_allow_html=True)
+
             st.dataframe(
                 df_crawl[['review', 'rating', 'rating_bintang', 'date', 'negara']].head(20),
                 use_container_width=True, hide_index=True
             )
-
-            st.subheader("Ringkasan")
-            col1, col2, col3, col4 = st.columns(4)
-            col1.metric("Total Data", len(df_crawl))
-            col2.metric("Rating 1-2 ⭐", (df_crawl['rating'] <= 2).sum())
-            col3.metric("Rating 3 ⭐", (df_crawl['rating'] == 3).sum())
-            col4.metric("Rating 4-5 ⭐", (df_crawl['rating'] >= 4).sum())
 
             st.session_state['df_crawl'] = df_crawl
 
@@ -265,5 +437,6 @@ if st.button("🚀 Mulai Crawling"):
                 file_name=f"steam_reviews_{negara_pilihan.lower().replace(' ', '_')}.csv",
                 mime="text/csv"
             )
+
     except Exception as e:
         st.error(f"Gagal melakukan crawling: {e}")
