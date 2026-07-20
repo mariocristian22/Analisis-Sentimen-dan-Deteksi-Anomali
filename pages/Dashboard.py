@@ -1,4 +1,4 @@
- import streamlit as st
+import streamlit as st
 import pandas as pd
 from utils import sentiment_from_rating, sentiment_from_text, detect_anomaly
 
