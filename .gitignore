@@ -3,3 +3,5 @@ __pycache__/
 .ipynb_checkpoints/
 .DS_Store
 .env
+checkpoint_revisi1/
+steam_reviews_clean.csv
