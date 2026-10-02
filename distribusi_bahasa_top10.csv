@@ -1,0 +1,373 @@
+bahasa,jumlah,negara,persentase
+English,68191,Amerika Serikat,83.2
+Somali,1817,Amerika Serikat,2.2
+Afrikaans,1336,Amerika Serikat,1.6
+Romanian,945,Amerika Serikat,1.2
+German,808,Amerika Serikat,1.0
+Italian,703,Amerika Serikat,0.9
+Dutch,674,Amerika Serikat,0.8
+Filipino,598,Amerika Serikat,0.7
+French,572,Amerika Serikat,0.7
+Norwegian,550,Amerika Serikat,0.7
+Indonesian,476,Amerika Serikat,0.6
+Danish,442,Amerika Serikat,0.5
+Polish,393,Amerika Serikat,0.5
+Catalan,392,Amerika Serikat,0.5
+Unknown,385,Amerika Serikat,0.5
+Welsh,372,Amerika Serikat,0.5
+Slovenian,367,Amerika Serikat,0.4
+Estonian,364,Amerika Serikat,0.4
+Swahili,322,Amerika Serikat,0.4
+Spanish,300,Amerika Serikat,0.4
+Portuguese,290,Amerika Serikat,0.4
+Turkish,241,Amerika Serikat,0.3
+Russian,186,Amerika Serikat,0.2
+Swedish,163,Amerika Serikat,0.2
+Albanian,145,Amerika Serikat,0.2
+Croatian,139,Amerika Serikat,0.2
+Finnish,129,Amerika Serikat,0.2
+Hungarian,112,Amerika Serikat,0.1
+Slovak,106,Amerika Serikat,0.1
+Czech,97,Amerika Serikat,0.1
+Vietnamese,93,Amerika Serikat,0.1
+Arabic,38,Amerika Serikat,0.0
+Lithuanian,36,Amerika Serikat,0.0
+Latvian,30,Amerika Serikat,0.0
+Chinese,28,Amerika Serikat,0.0
+Ukrainian,17,Amerika Serikat,0.0
+Persian,16,Amerika Serikat,0.0
+Korean,14,Amerika Serikat,0.0
+Thai,14,Amerika Serikat,0.0
+Bulgarian,10,Amerika Serikat,0.0
+Macedonian,10,Amerika Serikat,0.0
+Hebrew,9,Amerika Serikat,0.0
+Bengali,7,Amerika Serikat,0.0
+Greek,6,Amerika Serikat,0.0
+Urdu,5,Amerika Serikat,0.0
+Japanese,3,Amerika Serikat,0.0
+Hindi,2,Amerika Serikat,0.0
+ml,1,Amerika Serikat,0.0
+kn,1,Amerika Serikat,0.0
+Portuguese,17128,Brasil,76.6
+English,1182,Brasil,5.3
+Italian,640,Brasil,2.9
+Catalan,390,Brasil,1.7
+Spanish,362,Brasil,1.6
+Romanian,313,Brasil,1.4
+German,255,Brasil,1.1
+Somali,224,Brasil,1.0
+Lithuanian,214,Brasil,1.0
+Unknown,178,Brasil,0.8
+Slovak,170,Brasil,0.8
+Filipino,158,Brasil,0.7
+French,120,Brasil,0.5
+Afrikaans,105,Brasil,0.5
+Welsh,93,Brasil,0.4
+Slovenian,87,Brasil,0.4
+Swedish,81,Brasil,0.4
+Hungarian,71,Brasil,0.3
+Dutch,70,Brasil,0.3
+Indonesian,69,Brasil,0.3
+Finnish,65,Brasil,0.3
+Norwegian,60,Brasil,0.3
+Estonian,56,Brasil,0.3
+Croatian,53,Brasil,0.2
+Danish,52,Brasil,0.2
+Swahili,46,Brasil,0.2
+Polish,30,Brasil,0.1
+Vietnamese,30,Brasil,0.1
+Albanian,21,Brasil,0.1
+Turkish,17,Brasil,0.1
+Czech,11,Brasil,0.0
+Latvian,10,Brasil,0.0
+Ukrainian,2,Brasil,0.0
+Hebrew,1,Brasil,0.0
+Korean,1,Brasil,0.0
+Arabic,1,Brasil,0.0
+Greek,1,Brasil,0.0
+French,4696,Haiti,75.1
+English,649,Haiti,10.4
+Romanian,96,Haiti,1.5
+German,73,Haiti,1.2
+Italian,69,Haiti,1.1
+Somali,64,Haiti,1.0
+Catalan,62,Haiti,1.0
+Indonesian,59,Haiti,0.9
+Dutch,56,Haiti,0.9
+Portuguese,51,Haiti,0.8
+Unknown,45,Haiti,0.7
+Spanish,35,Haiti,0.6
+Arabic,34,Haiti,0.5
+Filipino,28,Haiti,0.4
+Afrikaans,28,Haiti,0.4
+Welsh,22,Haiti,0.4
+Polish,21,Haiti,0.3
+Swahili,19,Haiti,0.3
+Estonian,18,Haiti,0.3
+Danish,17,Haiti,0.3
+Slovenian,15,Haiti,0.2
+Finnish,14,Haiti,0.2
+Norwegian,13,Haiti,0.2
+Latvian,11,Haiti,0.2
+Vietnamese,11,Haiti,0.2
+Persian,7,Haiti,0.1
+Lithuanian,7,Haiti,0.1
+Turkish,6,Haiti,0.1
+Croatian,6,Haiti,0.1
+Hungarian,5,Haiti,0.1
+Albanian,4,Haiti,0.1
+Urdu,3,Haiti,0.0
+Slovak,3,Haiti,0.0
+Swedish,3,Haiti,0.0
+Czech,3,Haiti,0.0
+Russian,2,Haiti,0.0
+Indonesian,3873,Indonesia,51.3
+English,1318,Indonesia,17.5
+Filipino,547,Indonesia,7.3
+Somali,317,Indonesia,4.2
+Romanian,186,Indonesia,2.5
+German,181,Indonesia,2.4
+Afrikaans,100,Indonesia,1.3
+Estonian,83,Indonesia,1.1
+Unknown,82,Indonesia,1.1
+Welsh,75,Indonesia,1.0
+Swahili,72,Indonesia,1.0
+Italian,70,Indonesia,0.9
+Danish,67,Indonesia,0.9
+Polish,61,Indonesia,0.8
+Slovenian,45,Indonesia,0.6
+Norwegian,45,Indonesia,0.6
+Finnish,39,Indonesia,0.5
+Catalan,37,Indonesia,0.5
+Portuguese,37,Indonesia,0.5
+Dutch,36,Indonesia,0.5
+Croatian,33,Indonesia,0.4
+Hungarian,32,Indonesia,0.4
+Turkish,31,Indonesia,0.4
+Lithuanian,30,Indonesia,0.4
+French,30,Indonesia,0.4
+Slovak,27,Indonesia,0.4
+Swedish,23,Indonesia,0.3
+Spanish,19,Indonesia,0.3
+Czech,19,Indonesia,0.3
+Albanian,14,Indonesia,0.2
+Vietnamese,10,Indonesia,0.1
+Latvian,3,Indonesia,0.0
+Russian,1,Indonesia,0.0
+Chinese,1,Indonesia,0.0
+German,8729,Jerman,81.0
+English,1094,Jerman,10.2
+Romanian,88,Jerman,0.8
+Indonesian,86,Jerman,0.8
+Afrikaans,84,Jerman,0.8
+Dutch,77,Jerman,0.7
+French,73,Jerman,0.7
+Italian,48,Jerman,0.4
+Norwegian,47,Jerman,0.4
+Unknown,45,Jerman,0.4
+Swedish,44,Jerman,0.4
+Filipino,39,Jerman,0.4
+Somali,33,Jerman,0.3
+Danish,29,Jerman,0.3
+Estonian,27,Jerman,0.3
+Turkish,25,Jerman,0.2
+Polish,23,Jerman,0.2
+Swahili,22,Jerman,0.2
+Catalan,22,Jerman,0.2
+Finnish,18,Jerman,0.2
+Croatian,18,Jerman,0.2
+Hungarian,15,Jerman,0.1
+Spanish,13,Jerman,0.1
+Portuguese,12,Jerman,0.1
+Welsh,11,Jerman,0.1
+Vietnamese,10,Jerman,0.1
+Russian,9,Jerman,0.1
+Slovenian,8,Jerman,0.1
+Slovak,6,Jerman,0.1
+Albanian,4,Jerman,0.0
+Ukrainian,3,Jerman,0.0
+Latvian,3,Jerman,0.0
+Czech,2,Jerman,0.0
+Lithuanian,2,Jerman,0.0
+Arabic,1,Jerman,0.0
+Korean,5420,Korea Selatan,92.3
+English,243,Korea Selatan,4.1
+Somali,58,Korea Selatan,1.0
+Unknown,50,Korea Selatan,0.9
+Afrikaans,18,Korea Selatan,0.3
+German,13,Korea Selatan,0.2
+Estonian,8,Korea Selatan,0.1
+Welsh,7,Korea Selatan,0.1
+Norwegian,6,Korea Selatan,0.1
+Catalan,4,Korea Selatan,0.1
+Dutch,4,Korea Selatan,0.1
+Romanian,4,Korea Selatan,0.1
+Filipino,4,Korea Selatan,0.1
+Italian,3,Korea Selatan,0.1
+Swahili,3,Korea Selatan,0.1
+Albanian,2,Korea Selatan,0.0
+Portuguese,2,Korea Selatan,0.0
+Indonesian,2,Korea Selatan,0.0
+French,2,Korea Selatan,0.0
+Swedish,2,Korea Selatan,0.0
+Croatian,2,Korea Selatan,0.0
+Hungarian,2,Korea Selatan,0.0
+Czech,2,Korea Selatan,0.0
+Polish,2,Korea Selatan,0.0
+Danish,2,Korea Selatan,0.0
+Finnish,1,Korea Selatan,0.0
+Vietnamese,1,Korea Selatan,0.0
+Turkish,1,Korea Selatan,0.0
+Japanese,1,Korea Selatan,0.0
+Spanish,1,Korea Selatan,0.0
+Spanish,21832,Meksiko,77.6
+English,995,Meksiko,3.5
+Portuguese,749,Meksiko,2.7
+Italian,523,Meksiko,1.9
+Catalan,483,Meksiko,1.7
+Romanian,474,Meksiko,1.7
+Somali,371,Meksiko,1.3
+German,289,Meksiko,1.0
+Filipino,279,Meksiko,1.0
+Unknown,262,Meksiko,0.9
+Indonesian,232,Meksiko,0.8
+Slovenian,222,Meksiko,0.8
+French,166,Meksiko,0.6
+Dutch,156,Meksiko,0.6
+Estonian,128,Meksiko,0.5
+Swahili,125,Meksiko,0.4
+Afrikaans,112,Meksiko,0.4
+Finnish,105,Meksiko,0.4
+Welsh,81,Meksiko,0.3
+Croatian,61,Meksiko,0.2
+Polish,60,Meksiko,0.2
+Turkish,59,Meksiko,0.2
+Lithuanian,52,Meksiko,0.2
+Norwegian,51,Meksiko,0.2
+Latvian,45,Meksiko,0.2
+Vietnamese,45,Meksiko,0.2
+Danish,38,Meksiko,0.1
+Slovak,32,Meksiko,0.1
+Hungarian,32,Meksiko,0.1
+Albanian,23,Meksiko,0.1
+Swedish,20,Meksiko,0.1
+Czech,19,Meksiko,0.1
+Arabic,2,Meksiko,0.0
+Japanese,2,Meksiko,0.0
+Greek,2,Meksiko,0.0
+Hindi,1,Meksiko,0.0
+Russian,1,Meksiko,0.0
+Polish,8491,Polandia,69.8
+English,1061,Polandia,8.7
+Slovenian,370,Polandia,3.0
+Indonesian,302,Polandia,2.5
+Croatian,225,Polandia,1.8
+Afrikaans,164,Polandia,1.3
+Slovak,162,Polandia,1.3
+Romanian,142,Polandia,1.2
+German,112,Polandia,0.9
+Unknown,111,Polandia,0.9
+Somali,104,Polandia,0.9
+Italian,103,Polandia,0.8
+Spanish,87,Polandia,0.7
+Hungarian,77,Polandia,0.6
+Portuguese,71,Polandia,0.6
+Estonian,57,Polandia,0.5
+Filipino,54,Polandia,0.4
+Latvian,50,Polandia,0.4
+Catalan,49,Polandia,0.4
+Swahili,48,Polandia,0.4
+Dutch,43,Polandia,0.4
+French,37,Polandia,0.3
+Czech,34,Polandia,0.3
+Welsh,33,Polandia,0.3
+Lithuanian,33,Polandia,0.3
+Finnish,29,Polandia,0.2
+Swedish,26,Polandia,0.2
+Norwegian,25,Polandia,0.2
+Vietnamese,14,Polandia,0.1
+Turkish,13,Polandia,0.1
+Danish,12,Polandia,0.1
+Albanian,11,Polandia,0.1
+Russian,7,Polandia,0.1
+Ukrainian,3,Polandia,0.0
+Bulgarian,2,Polandia,0.0
+Arabic,1,Polandia,0.0
+Japanese,1,Polandia,0.0
+Russian,58026,Rusia,81.9
+Bulgarian,3659,Rusia,5.2
+Ukrainian,2078,Rusia,2.9
+English,2000,Rusia,2.8
+Macedonian,1798,Rusia,2.5
+Unknown,499,Rusia,0.7
+Somali,411,Rusia,0.6
+Romanian,290,Rusia,0.4
+German,216,Rusia,0.3
+Slovenian,162,Rusia,0.2
+Estonian,149,Rusia,0.2
+Afrikaans,146,Rusia,0.2
+Indonesian,141,Rusia,0.2
+Norwegian,107,Rusia,0.2
+Croatian,102,Rusia,0.1
+Polish,92,Rusia,0.1
+Filipino,92,Rusia,0.1
+Dutch,86,Rusia,0.1
+Italian,84,Rusia,0.1
+Welsh,82,Rusia,0.1
+Portuguese,72,Rusia,0.1
+Slovak,56,Rusia,0.1
+Swahili,51,Rusia,0.1
+Catalan,49,Rusia,0.1
+Danish,42,Rusia,0.1
+Finnish,41,Rusia,0.1
+French,41,Rusia,0.1
+Vietnamese,40,Rusia,0.1
+Spanish,36,Rusia,0.1
+Lithuanian,36,Rusia,0.1
+Turkish,34,Rusia,0.0
+Czech,25,Rusia,0.0
+Swedish,22,Rusia,0.0
+Hungarian,20,Rusia,0.0
+Albanian,19,Rusia,0.0
+Latvian,13,Rusia,0.0
+Japanese,9,Rusia,0.0
+Arabic,7,Rusia,0.0
+Chinese,2,Rusia,0.0
+Korean,1,Rusia,0.0
+Bengali,1,Rusia,0.0
+Hindi,1,Rusia,0.0
+Turkish,9608,Turki,78.1
+English,694,Turki,5.6
+Somali,262,Turki,2.1
+German,250,Turki,2.0
+Indonesian,182,Turki,1.5
+Romanian,159,Turki,1.3
+Swahili,132,Turki,1.1
+Unknown,106,Turki,0.9
+Estonian,91,Turki,0.7
+Filipino,85,Turki,0.7
+Danish,74,Turki,0.6
+Finnish,63,Turki,0.5
+Dutch,60,Turki,0.5
+Afrikaans,54,Turki,0.4
+Italian,48,Turki,0.4
+Norwegian,47,Turki,0.4
+Catalan,43,Turki,0.3
+Hungarian,41,Turki,0.3
+Welsh,40,Turki,0.3
+Portuguese,38,Turki,0.3
+Polish,33,Turki,0.3
+Croatian,31,Turki,0.3
+Swedish,28,Turki,0.2
+Spanish,25,Turki,0.2
+Slovenian,25,Turki,0.2
+French,21,Turki,0.2
+Vietnamese,16,Turki,0.1
+Albanian,14,Turki,0.1
+Latvian,11,Turki,0.1
+Czech,11,Turki,0.1
+Slovak,10,Turki,0.1
+Lithuanian,3,Turki,0.0
+Japanese,1,Turki,0.0
+Arabic,1,Turki,0.0
+Russian,1,Turki,0.0

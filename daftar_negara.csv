@@ -1,0 +1,190 @@
+negara,lang,country
+Amerika Serikat,en,us
+Kanada,en,ca
+Meksiko,es,mx
+Brasil,pt,br
+Argentina,es,ar
+Chile,es,cl
+Kolombia,es,co
+Peru,es,pe
+Venezuela,es,ve
+Ekuador,es,ec
+Bolivia,es,bo
+Paraguay,es,py
+Uruguay,es,uy
+Jamaika,en,jm
+Trinidad dan Tobago,en,tt
+Barbados,en,bb
+Bahama,en,bs
+Belize,en,bz
+Kosta Rika,es,cr
+Panama,es,pa
+Guatemala,es,gt
+Honduras,es,hn
+El Salvador,es,sv
+Nicaragua,es,ni
+Republik Dominika,es,do
+Haiti,fr,ht
+Kuba,es,cu
+Puerto Riko,es,pr
+Inggris,en,gb
+Irlandia,en,ie
+Prancis,fr,fr
+Jerman,de,de
+Italia,it,it
+Spanyol,es,es
+Portugal,pt,pt
+Belanda,nl,nl
+Belgia,fr,be
+Swiss,de,ch
+Austria,de,at
+Polandia,pl,pl
+Rusia,ru,ru
+Ukraina,uk,ua
+Turki,tr,tr
+Ceko,cs,cz
+Rumania,ro,ro
+Hungaria,hu,hu
+Yunani,el,gr
+Swedia,sv,se
+Norwegia,no,no
+Denmark,da,dk
+Finlandia,fi,fi
+Slovakia,sk,sk
+Slovenia,sl,si
+Bulgaria,bg,bg
+Serbia,sr,rs
+Kroasia,hr,hr
+Bosnia dan Herzegovina,bs,ba
+Makedonia Utara,mk,mk
+Albania,sq,al
+Montenegro,sr,me
+Latvia,lv,lv
+Lituania,lt,lt
+Estonia,et,ee
+Islandia,is,is
+Malta,mt,mt
+Luksemburg,fr,lu
+Belarus,be,by
+Moldova,ro,md
+Siprus,el,cy
+San Marino,it,sm
+Monako,fr,mc
+Liechtenstein,de,li
+Andorra,ca,ad
+Vatikan,it,va
+Jepang,ja,jp
+Korea Selatan,ko,kr
+China,zh,cn
+Taiwan,zh,tw
+Hong Kong,zh,hk
+Indonesia,id,id
+Malaysia,ms,my
+Thailand,th,th
+Vietnam,vi,vn
+Singapura,en,sg
+Filipina,tl,ph
+India,hi,in
+Pakistan,ur,pk
+Bangladesh,bn,bd
+Kamboja,km,kh
+Laos,lo,la
+Myanmar,my,mm
+Sri Lanka,si,lk
+Nepal,ne,np
+Kazakhstan,kk,kz
+Uzbekistan,uz,uz
+Kirgizstan,ky,kg
+Tajikistan,tg,tj
+Turkmenistan,tk,tm
+Azerbaijan,az,az
+Armenia,hy,am
+Georgia,ka,ge
+Mongolia,mn,mn
+Makau,zh,mo
+Brunei,ms,bn
+Timor-Leste,pt,tl
+Bhutan,dz,bt
+Maladewa,dv,mv
+Afghanistan,fa,af
+Arab Saudi,ar,sa
+Uni Emirat Arab,ar,ae
+Mesir,ar,eg
+Israel,he,il
+Iran,fa,ir
+Irak,ar,iq
+Yordania,ar,jo
+Lebanon,ar,lb
+Kuwait,ar,kw
+Qatar,ar,qa
+Oman,ar,om
+Bahrain,ar,bh
+Suriah,ar,sy
+Yaman,ar,ye
+Palestina,ar,ps
+Afrika Selatan,en,za
+Nigeria,en,ng
+Kenya,sw,ke
+Tanzania,sw,tz
+Ghana,en,gh
+Kamerun,fr,cm
+Senegal,fr,sn
+Pantai Gading,fr,ci
+Etiopia,am,et
+Uganda,sw,ug
+Mozambik,pt,mz
+Angola,pt,ao
+Zambia,en,zm
+Zimbabwe,en,zw
+Rwanda,fr,rw
+Botswana,en,bw
+Namibia,en,na
+Malawi,en,mw
+Mauritius,en,mu
+Tunisia,fr,tn
+Maroko,ar,ma
+Aljazair,ar,dz
+Libya,ar,ly
+Sudan,ar,sd
+Burkina Faso,fr,bf
+Mali,fr,ml
+Niger,fr,ne
+Togo,fr,tg
+Benin,fr,bj
+Gabon,fr,ga
+Republik Demokratik Kongo,fr,cd
+Republik Kongo,fr,cg
+Somalia,so,so
+Djibouti,fr,dj
+Eritrea,ti,er
+Madagaskar,fr,mg
+Komoro,ar,km
+Seychelles,fr,sc
+Tanjung Verde,pt,cv
+Guinea,fr,gn
+Guinea-Bissau,pt,gw
+Guinea Khatulistiwa,es,gq
+Sierra Leone,en,sl
+Liberia,en,lr
+Gambia,en,gm
+Sao Tome dan Principe,pt,st
+Afrika Tengah,fr,cf
+Chad,fr,td
+Sudan Selatan,en,ss
+Burundi,fr,bi
+Lesotho,en,ls
+Eswatini,en,sz
+Australia,en,au
+Selandia Baru,en,nz
+Papua Nugini,en,pg
+Fiji,en,fj
+Kepulauan Solomon,en,sb
+Vanuatu,fr,vu
+Samoa,en,ws
+Tonga,en,to
+Kiribati,en,ki
+Nauru,en,nr
+Tuvalu,en,tv
+Palau,en,pw
+Mikronesia,en,fm
+Kepulauan Marshall,en,mh
